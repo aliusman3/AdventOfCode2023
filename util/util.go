@@ -26,7 +26,7 @@ func ReadInput(filePath string) []string {
 	return inputArray
 }
 
-func CreateOutput() *os.File {
+func CreateLogFile() *os.File {
 	output, err := os.Create("output.log")
 	if err != nil {
 		log.Fatal(err)

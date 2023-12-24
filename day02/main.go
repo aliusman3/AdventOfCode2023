@@ -57,7 +57,7 @@ var maxCubes = map[string]int{
 func main() {
 	inputLines := util.ReadInput("input")
 
-	output := util.CreateOutput()
+	output := util.CreateLogFile()
 	defer output.Close()
 	logOutput := util.GetLogger(output)
 
