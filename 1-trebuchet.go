@@ -38,7 +38,7 @@ func findStringDigit(line string, idx int, lineSize int, reverse bool, w io.Writ
 
 func main() {
 	sum := 0
-	file, err := os.Open("input.txt")
+	file, err := os.Open("input")
 	if err != nil {
 		log.Fatal(err)
 	}
