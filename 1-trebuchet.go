@@ -12,7 +12,7 @@ import (
 
 var digitStrings = map[string]int{"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9}
 
-func findStringDigit(line string, idx int, lineSize int, reverse bool, w io.Writer) (int, bool) {
+func findStringDigit(line string, idx int, lineSize int, w io.Writer) (int, bool) {
 	sub := ""
 	if idx+5 <= lineSize {
 		sub = line[idx : idx+5]
@@ -20,16 +20,8 @@ func findStringDigit(line string, idx int, lineSize int, reverse bool, w io.Writ
 		sub = line[idx:]
 	}
 	for k, v := range digitStrings {
-		if strings.Contains(sub, k) && !(strings.HasPrefix(sub, k) || strings.HasSuffix(sub, k)) {
-			fmt.Fprintf(w, " substring match but no prefix or suffix %s ", sub)
-		}
-		if !reverse && strings.HasPrefix(sub, k) {
-			fmt.Fprintf(w, " found prefix for sub %s", sub)
-			return v, true
-		}
-
-		if reverse && strings.HasSuffix(sub, k) {
-			fmt.Fprintf(w, " found suffix for sub %s", sub)
+		if strings.HasPrefix(sub, k) {
+			fmt.Fprintf(w, " found match for sub %s", sub)
 			return v, true
 		}
 	}
@@ -67,7 +59,7 @@ func main() {
 			if unicode.IsDigit(c) {
 				firstDigit = int(c - '0')
 				break
-			} else if sd, found := findStringDigit(line, i, lineSize, false, result); found {
+			} else if sd, found := findStringDigit(line, i, lineSize, result); found {
 				firstDigit = sd
 				break
 			}
@@ -79,7 +71,7 @@ func main() {
 			if unicode.IsDigit(c) {
 				lastDigit = int(c - '0')
 				break
-			} else if sd, found := findStringDigit(line, j, lineSize, true, result); found {
+			} else if sd, found := findStringDigit(line, j, lineSize, result); found {
 				lastDigit = sd
 				break
 			}
